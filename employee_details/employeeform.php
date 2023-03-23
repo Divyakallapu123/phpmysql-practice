@@ -12,7 +12,24 @@
    values ('$empname','$email','$phone','$username')";
    $result=mysqli_query($con,$sql);
    if($result){
-   header('location:details.php');
+    $sql="select * from `employee`";
+    $result=mysqli_query($con,$sql);
+    if($result){
+       while($row=mysqli_fetch_assoc($result)){
+         $id = $row["emp_id"];
+          $empname = $row["emp_name"];
+          $email = $row["email"];
+          $phone = $row["phone"];
+          $username = $row["username"];
+          echo '<tr>
+          <th scope="row">'.$id.'</th>
+          <td>'.$empname.'</td>
+          <td>'.$email.'</td>
+          <td>'.$phone.'</td>
+          <td>'.$username.'</td> 
+        </tr>';
+       }
+    }
    }else{
        die(mysqli_error(!$con));
    }
